@@ -1,0 +1,38 @@
+<!-- Chat widget: paste this block just before </body> in vet-frontend/index.html -->
+<div id="chat-root" aria-live="polite" aria-atomic="true">
+  <!-- floating messenger button (bottom-right) -->
+  <button id="cw-toggle" class="cw-toggle" aria-label="Open Purrfect Assistant" title="Chat with Purrfect Assistant">
+  <img src="LEGIT.png" alt="Chat" width="28" height="28" style="display:block">
+</button>
+  <!-- modal panel -->
+  <div id="cw-modal" class="cw-modal" role="dialog" aria-label="Purrffect Assistant" aria-hidden="true">
+    <header class="cw-header">
+      <div class="cw-brand">
+        <div class="cw-icon" aria-hidden="true">💬</div>
+        <div class="cw-text">
+          <div class="cw-title">Purrfect  Assistant</div>
+          <div class="cw-sub">Always here to help</div>
+        </div>
+      </div>
+
+      <div class="cw-actions">
+        <button id="cw-minimize" class="cw-btn-icon" title="Minimize" aria-label="Minimize chat">—</button>
+        <button id="cw-close" class="cw-btn-icon" title="Close" aria-label="Close chat">✕</button>
+      </div>
+    </header>
+
+    <div id="cw-body" class="cw-body" role="log" aria-live="polite">
+      <!-- messages will be appended here by chat-widget.js -->
+    </div>
+
+    <form id="cw-form" class="cw-form" autocomplete="off" aria-label="Chat input">
+      <input id="cw-input" class="cw-input" type="text" placeholder="Ask about pet care..." aria-label="Ask about pet care" />
+      <button id="cw-send" type="submit" class="cw-send" aria-label="Send message">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M22 2L11 13"></path>
+          <path d="M22 2l-7 20-1-7-7-1z"></path>
+        </svg>
+      </button>
+    </form>
+  </div>
+</div>

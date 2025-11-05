@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Doctor Login</title>
+  <link rel="stylesheet" href="styles/login.css">
+</head>
+<body>
+  
+  <!-- Login form for doctors with account creation option -->
+  <div class="login-container">
+    <h2>Doctor Login</h2>
+    <form id="loginForm" autocomplete="off">
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button type="submit">Log In</button>
+      <div id="loginError" class="error-message"></div>
+    </form>
+    <button id="showAddDoctorBtn" class="add-account-btn">Create New Account</button>
+  </div>
+
+  <!-- Modal for creating a new doctor account -->
+  <div id="addDoctorModal" class="modal">
+    <div class="modal-content">
+      <span id="closeAddDoctorModal" class="close">&times;</span>
+      <h3>Create Doctor Account</h3>
+      <form id="addDoctorForm" autocomplete="off">
+        <input type="email" id="addDoctorEmail" placeholder="Email" required>
+        <input type="password" id="addDoctorPassword" placeholder="Password" required>
+        <input type="text" id="addDoctorDisplayName" placeholder="Display Name" required>
+        <button type="submit">Register</button>
+        <div id="add-doctor-error-message" class="error-message"></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="scripts/login.js"></script>
+</body>
+</html>

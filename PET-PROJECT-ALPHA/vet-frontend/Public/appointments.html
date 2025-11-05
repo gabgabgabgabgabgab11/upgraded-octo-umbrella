@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Appointment Management</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/appointments.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>  
+</head>
+<body>
+  <!-- Navbar -->
+<div class="navbar">
+  <div class="logo">
+    <img src="PICTURES/PURRFECTLOGOFINAL.png" alt="Purrfect Paws Veterinary" />
+    <span>Purrfect Tracker</span>
+  </div>
+  <div class="nav">
+    <a href="dashboard.html" >Dashboard</a>
+    <a href="owners.html">Owners</a>
+    <a href="pets.html">Pets</a>
+    <a href="appointments.html" class="active">Appointments</a>
+    <a href="treatments.html">Treatments</a>
+    <a href="vaccinations.html">Vaccinations</a>
+  </div>
+ <div class="profile-dropdown" id="userProfileDropdown">
+    <div class="profile" id="userProfile">
+               <img id="doctorPhoto" class="profile-photo" src="http://localhost:5000/uploads/default.jpg" alt="EG" />
+          <span id="doctorName"></span>
+      <span class="profile-arrow" id="dropdownArrow">&#9662;</span>
+    </div>
+    <div class="dropdown-menu" id="profileDropdownMenu">
+     <a href="settings.html" id="profileSettings">Settings</a>
+      <a href="#" id="logoutBtn">Log Out</a>
+    </div>
+  </div>
+</div>
+  <div class="container">
+  <div class="header-row">
+    <h2>Appointment Management</h2>
+  </div>
+  <div class="controls-row">
+    <form class="search" onsubmit="return false;">
+      <input type="text" id="searchInput" placeholder="Search appointments..." autocomplete="off">
+    </form>
+    <div class="filter">
+      <select id="apptTypeFilter">
+        <option value="all">All</option>
+        <option value="Scheduled">Scheduled</option>
+        <option value="Completed">Completed</option>
+        <option value="Cancelled">Cancelled</option>
+      </select>
+    </div>
+    <div class="add-btn-row">
+      <button class="add-appointment-btn" id="addAppointmentBtn">
+        <svg width="19" height="19" fill="#fff" style="margin-right:9px;">
+          <circle cx="9.5" cy="9.5" r="9.5" fill="#6d9efc"/>
+          <rect x="8.5" y="4.5" width="2" height="9" rx="1" fill="#fff"/>
+          <rect x="4.5" y="8.5" width="9" height="2" rx="1" fill="#fff"/>
+        </svg>
+        New Appointment
+      </button>
+      <button id="pdfBtn" class="pdf-btn">
+      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" style="margin-right:8px;vertical-align:middle;">
+        <path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      PDF
+    </button>
+    </div>
+  </div>
+  <div class="appt-table-wrapper">
+    <table class="appt-table">
+      <thead>
+        <tr>
+          <th>APPT ID</th>
+          <th>DATE &amp; TIME</th>
+          <th>PET</th>
+          <th>OWNER</th>
+          <th>TYPE</th>
+          <th>STATUS</th>
+          <th>NOTES</th>
+          <th>ACTIONS</th>
+        </tr>
+      </thead>
+      <tbody id="apptTableBody">
+        <!-- Table rows rendered here by JS -->
+      </tbody>
+    </table>
+  </div>
+  <div class="pagination-row">
+    <button id="prevPageBtn">&#8249;</button>
+    <span id="pageIndicator">Page 1 of 1</span>
+    <button id="nextPageBtn">&#8250;</button>
+  </div>
+</div>
+
+ <!-- Add Appointment Modal -->
+<div class="modal" id="addAppointmentModal">
+  <div class="modal-content">
+    <span class="close" id="closeAddAppointmentModal">&times;</span>
+    <h2>Add New Appointment</h2>
+    <form id="addAppointmentForm" class="modal-details-form" autocomplete="off">
+      <div class="modal-field">
+        <label for="appointmentPetSelect">Pet Name</label>
+        <select id="appointmentPetSelect" required>
+          <option value="">Select Pet</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label for="appointmentOwner">Owner Name</label>
+        <input type="text" id="appointmentOwner" readonly>
+      </div>
+      <div class="modal-field">
+        <label for="appointmentDateTime">Date & Time</label>
+        <input type="datetime-local" id="appointmentDateTime" required>
+      </div>
+      <div class="modal-field">
+        <label for="appointmentType">Type</label>
+        <input type="text" id="appointmentType" required>
+      </div>
+      <div class="modal-field">
+        <label for="appointmentStatus">Status</label>
+        <select id="appointmentStatus" required>
+          <option value="Scheduled">Scheduled</option>
+          <option value="Completed">Completed</option>
+          <option value="Cancelled">Cancelled</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label for="appointmentNotes">Notes</label>
+        <input type="text" id="appointmentNotes">
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="modal-cancel" id="cancelAddAppointmentBtn">Cancel</button>
+        <button type="submit" class="modal-save">Save Appointment</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Edit Appointment Modal -->
+<div class="modal" id="editAppointmentModal">
+  <div class="modal-content">
+    <span class="close" id="closeEditAppointmentModal">&times;</span>
+    <h2>Edit Appointment</h2>
+    <form id="editAppointmentForm" class="modal-details-form" autocomplete="off">
+      <input type="hidden" id="editApptId">
+      <div class="modal-field">
+        <label for="editAppointmentPetSelect">Pet Name</label>
+        <select id="editAppointmentPetSelect" required>
+          <option value="">Select Pet</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label for="editAppointmentOwner">Owner Name</label>
+        <input type="text" id="editAppointmentOwner" readonly>
+      </div>
+      <div class="modal-field">
+        <label for="editAppointmentDateTime">Date & Time</label>
+        <input type="datetime-local" id="editAppointmentDateTime" required>
+      </div>
+      <div class="modal-field">
+        <label for="editAppointmentType">Type</label>
+        <input type="text" id="editAppointmentType" required>
+      </div>
+      <div class="modal-field">
+        <label for="editAppointmentStatus">Status</label>
+        <select id="editAppointmentStatus" required>
+          <option value="Scheduled">Scheduled</option>
+          <option value="Completed">Completed</option>
+          <option value="Cancelled">Cancelled</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label for="editAppointmentNotes">Notes</label>
+        <input type="text" id="editAppointmentNotes">
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="modal-cancel" id="cancelEditAppointmentBtn">Cancel</button>
+        <button type="submit" class="modal-save">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Delete Appointment Modal -->
+<div class="modal" id="deleteAppointmentModal">
+  <div class="modal-content">
+    <span class="close" id="closeDeleteAppointmentModal">&times;</span>
+    <h2>Delete Appointment</h2>
+    <div class="delete-warning" id="deleteAppointmentMsg">
+      Are you sure you want to delete this appointment?
+    </div>
+    <div class="modal-actions">
+      <button type="button" class="modal-cancel" id="cancelDeleteAppointmentBtn">Cancel</button>
+      <button type="button" class="modal-save" style="background:#fa9494; color: rgb(255, 255, 255);" id="confirmDeleteAppointmentBtn">Delete</button>
+    </div>
+  </div>
+</div>
+<script>
+  // Debug: Force check navigation on appointments page
+  setTimeout(() => {
+    console.log('Manual nav check triggered');
+    if (window.checkNavigationAccess) {
+      window.checkNavigationAccess();
+    } else {
+      console.error('checkNavigationAccess not found!');
+    }
+  }, 500);
+  // For APPOINTMENTS page
+function showDeleteAppointmentModal(appointmentId, appointmentInfo) {
+  const modal = document.getElementById('deleteModal');
+  const modalTitle = modal.querySelector('h2');
+  const modalText = modal.querySelector('.modal-text');
+  const deleteBtn = modal.querySelector('.delete-confirm-btn');
+  
+  modalTitle.textContent = 'Archive Appointment';
+  modalText.innerHTML = `
+    Are you sure you want to archive this appointment?
+    <div style="margin: 10px 0; padding: 10px; background: #f5f5f5; border-radius: 6px;">
+      ${appointmentInfo}
+    </div>
+    <div style="margin-top: 12px; padding: 12px; background: #fff3cd; border-radius: 8px; font-size: 0.92em; color: #856404;">
+      ⏰ This appointment will be automatically deleted after 30 days. You can restore it from Settings > Archive before then.
+    </div>
+  `;
+  deleteBtn.textContent = 'Archive';
+  deleteBtn.style.background = '#ffc107';
+  
+  deleteBtn.onclick = () => archiveAppointment(appointmentId);
+  modal.style.display = 'flex';
+}
+
+async function archiveAppointment(appointmentId) {
+  try {
+    const response = await fetch(`http://localhost:5000/api/appointments/${appointmentId}/archive`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      showNotification('Appointment archived successfully. It will be deleted in 30 days.', 'success');
+      closeModal();
+      loadAppointments(); // Reload your appointments list
+    } else {
+      showNotification('Failed to archive appointment', 'error');
+    }
+  } catch (error) {
+    console.error('Error archiving appointment:', error);
+    showNotification('Error archiving appointment', 'error');
+  }
+}
+</script>
+<script src="scripts/nav-control.js"></script>
+<script src="scripts/appointments.js"></script>
+<script src="scripts/settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Settings</title>
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/settings.css">
+</head>
+<body>
+
+  <!-- Settings modal with sidebar navigation -->
+<div class="settings-modal-bg">
+  <div class="settings-modal">
+    <div class="settings-header">
+      <span class="settings-title">Settings</span>
+      <button class="settings-close" title="Close">&times;</button>
+    </div>
+    <div class="settings-main">
+      <aside class="settings-sidebar">
+        <ul>
+          <li class="active"><span class="icon">&#9881;</span> General</li>
+          <li><span class="icon">&#128100;</span> Account</li>
+          <li><span class="icon">&#128230;</span> Archive</li>
+          <li><span class="icon">&#128276;</span> Notifications</li>
+          <li><span class="icon">&#128396;</span> Appearance</li>
+        </ul>
+      </aside>
+      <div class="settings-content">
+        <!-- Settings: General tab for clinic information -->
+        <div id="tab-general" class="settings-tab active">
+          <form class="clinic-form">
+            <h2 class="section-title">Clinic Information</h2>
+            <div class="clinic-field">
+              <label for="clinicName">Clinic Name</label>
+              <input type="text" id="clinicName" class="clinic-input" value="PawCare Veterinary Clinic" />
+            </div>
+            <div class="clinic-field">
+              <label for="clinicAddress">Address</label>
+              <textarea id="clinicAddress" class="clinic-input" rows="3">123 Main Street, Veterinary District, City 12345</textarea>
+            </div>
+            <div class="clinic-field">
+              <label for="clinicPhone">Phone Number</label>
+              <input type="text" id="clinicPhone" class="clinic-input" value="(555) 123-PETS" />
+            </div>
+            <h3 class="section-title" style="margin-top:36px;">Operating Hours</h3>
+            <div class="clinic-hours-row">
+              <div class="clinic-field">
+                <label for="openingTime">Opening Time</label>
+                <input type="time" id="openingTime" class="clinic-input" value="08:00" />
+              </div>
+              <div class="clinic-field">
+                <label for="closingTime">Closing Time</label>
+                <input type="time" id="closingTime" class="clinic-input" value="18:00" />
+              </div>
+            </div>
+            <div class="clinic-field">
+              <label for="emergencyHours">Emergency Hours</label>
+              <select id="emergencyHours" class="clinic-input">
+                <option>24/7 Emergency Service</option>
+                <option>None</option>
+              </select>
+            </div>
+            <hr class="clinic-divider"/>
+            <div class="settings-actions">
+              <button type="button" class="cancel-btn">Cancel</button>
+              <button type="submit" class="save-btn">Save Changes</button>
+            </div>
+          </form>
+        </div>
+
+       <!-- Settings: Account tab for profile and security -->
+<div id="tab-account" class="settings-tab">
+  <form class="profile-form" autocomplete="off">
+    <h2 class="section-title">Profile Information</h2>
+    <div class="profile-avatar-section">
+      <div class="profile-avatar">
+        <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+          <circle cx="36" cy="36" r="36" fill="#A7AEDC"/>
+          <path d="M36 38c5.523 0 10-4.477 10-10s-4.477-10-10-10-10 4.477-10 10 4.477 10 10 10Zm0 4c-6.627 0-20 3.343-20 10v2a2 2 0 0 0 2 2h36a2 2 0 0 0 2-2v-2c0-6.657-13.373-10-20-10Z" fill="#fff"/>
+        </svg>
+      </div>
+      <button type="button" class="profile-photo-btn">Change Photo</button>
+    </div>
+    <div class="profile-field">
+      <label for="doctorName">Doctor Name</label>
+      <input type="text" id="doctorName" class="profile-input" value="Dr. Smith" />
+    </div>
+    <div class="profile-field">
+      <label for="emailAddress">Email Address</label>
+      <input type="email" id="emailAddress" class="profile-input" value="dr.smith@pawcare.com" />
+    </div>
+    <div class="profile-field">
+      <label for="specialty">Specialty</label>
+      <input type="text" id="specialty" class="profile-input" value="General Veterinary Medicine" />
+    </div>
+    <hr class="profile-divider"/>
+    <div class="profile-security-section">
+      <h3 class="profile-section-title">Security</h3>
+      <button type="button" class="profile-password-btn">Change Password</button>
+      <div class="profile-2fa-toggle">
+        <label class="switch">
+          <input type="checkbox" checked>
+          <span class="slider"></span>
+        </label>
+        <span class="profile-2fa-label">Two-Factor Authentication</span>
+      </div>
+    </div>
+    <div class="settings-form-actions">
+      <button type="button" class="btn-cancel">Cancel</button>
+      <button type="submit" class="btn-save save-btn">Save Changes</button>
+    </div>
+  </form>
+</div>
+
+<!-- Settings: Archive Tab -->
+<div id="tab-archive" class="settings-tab">
+  <div class="archive-container">
+    <h2 class="section-title">Archived Items</h2>
+    <p class="archive-description">
+      Items moved to archive will be automatically deleted after 30 days. You can restore them before that time.
+    </p>
+    
+    <!-- Archive Stats -->
+    <div class="archive-stats">
+      <div class="archive-stat-card">
+        <div class="stat-number" id="totalArchivedCount">0</div>
+        <div class="stat-label">Total Archived</div>
+      </div>
+      <div class="archive-stat-card">
+        <div class="stat-number" id="expiringSoonCount">0</div>
+        <div class="stat-label">Expiring Soon (7 days)</div>
+      </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="archive-filter-tabs">
+      <button class="archive-filter-btn active" data-filter="all">All Items</button>
+      <button class="archive-filter-btn" data-filter="owner">Owners</button>
+      <button class="archive-filter-btn" data-filter="pet">Pets</button>
+      <button class="archive-filter-btn" data-filter="appointment">Appointments</button>
+      <button class="archive-filter-btn" data-filter="treatment">Treatments</button>
+      <button class="archive-filter-btn" data-filter="vaccination">Vaccinations</button>
+    </div>
+
+    <!-- Archived Items List -->
+    <div class="archived-items-list" id="archivedItemsList">
+      <div class="archive-empty-state">
+        <div class="archive-empty-state-icon">📦</div>
+        <h3>Loading archived items...</h3>
+      </div>
+    </div>
+
+    <!-- Cleanup Section -->
+    <div class="cleanup-section-archive">
+      <div class="cleanup-icon">⚠️</div>
+      <div class="cleanup-content">
+        <h3>Cleanup Expired Archives</h3>
+        <p>Permanently delete all items that have been archived for more than 30 days.</p>
+        <button class="cleanup-btn-archive" id="cleanupBtn">
+          Run Cleanup Now
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+        <!-- Settings: Notifications tab for email and push preferences -->
+       <div id="tab-notifications" class="settings-tab">
+  <form class="notifications-form" autocomplete="off">
+    <div class="notifications-section">
+      <h2 class="notifications-title">Email Notifications</h2>
+      <div class="notification-item">
+        <label class="notification-switch">
+          <input type="checkbox" checked>
+          <span class="slider"></span>
+        </label>
+        <span class="notification-label">Appointment Reminders</span>
+      </div>
+      <div class="notification-item">
+        <label class="notification-switch">
+          <input type="checkbox" checked>
+          <span class="slider"></span>
+        </label>
+        <span class="notification-label">Vaccination Due Alerts</span>
+      </div>
+      <div class="notification-item">
+        <label class="notification-switch">
+          <input type="checkbox">
+          <span class="slider"></span>
+        </label>
+        <span class="notification-label">System Updates</span>
+      </div>
+    </div>
+    <hr class="notifications-divider"/>
+    <div class="notifications-section">
+      <h2 class="notifications-title">Push Notifications</h2>
+      <div class="notification-item">
+        <label class="notification-switch">
+          <input type="checkbox" checked>
+          <span class="slider"></span>
+        </label>
+        <span class="notification-label">Emergency Appointments</span>
+      </div>
+      <div class="notification-item">
+        <label class="notification-switch">
+          <input type="checkbox">
+          <span class="slider"></span>
+        </label>
+        <span class="notification-label">Daily Summary</span>
+      </div>
+    </div>
+    <div class="settings-actions-notifications">
+      <button type="button" class="cancel-btn-notifications">Cancel</button>
+      <button type="submit" class="save-btn-notifications">Save Changes</button>
+    </div>
+  </form>
+</div>
+
+        <!-- Settings: Appearance tab for theme and layout preferences -->
+        <div id="tab-appearance" class="settings-tab">
+          <form class="appearance-form" autocomplete="off">
+            <h2>Theme</h2>
+            <div class="theme-picker-appearance" id="themePicker">
+              <div class="theme-option-appearance" data-theme="light">
+                <div class="theme-preview-appearance light"></div>
+                <span>Light Theme</span>
+              </div>
+              <div class="theme-option-appearance" data-theme="dark">
+                <div class="theme-preview-appearance dark"></div>
+                <span>Dark Theme</span>
+              </div>
+              <div class="theme-option-appearance" data-theme="auto">
+                <div class="theme-preview-appearance auto"></div>
+                <span>Auto</span>
+              </div>
+            </div>
+            <hr class="appearance-divider" />
+            <h3>Layout</h3>
+            <label>
+              Sidebar Position
+              <select id="sidebarPosition">
+                <option>Left</option>
+                <option>Right</option>
+              </select>
+            </label>
+            <div class="toggle-row-appearance">
+              <label class="switch-appearance">
+                <input type="checkbox" id="compactMode">
+                <span class="slider-appearance"></span>
+              </label>
+              Compact Mode
+            </div>
+            <div class="settings-actions-appearance">
+              <button type="button" class="cancel-btn-appearance">Cancel</button>
+              <button type="submit" class="save-btn-appearance">Save Changes</button>
+            </div>
+          </form>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="scripts/settings.js"></script>
+</body>
+</html>

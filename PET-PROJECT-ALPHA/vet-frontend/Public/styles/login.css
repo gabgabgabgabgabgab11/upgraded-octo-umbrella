@@ -1,0 +1,120 @@
+body {
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: url('PICTURES/PurrfectTrackerLogo.png') no-repeat center center/cover;
+  filter: blur(3px) brightness(0.7);
+}
+body, html {
+  height: 100vh;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-container {
+  background-color: rgba(255,255,255,0.85);
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  width: 320px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  margin: auto;
+}
+.login-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #2ab5ec;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+button:hover, .add-account-btn:hover {
+  background-color: #38a9f5;
+}
+.add-account-btn {
+  margin-top: 15px;
+  background: #fff;
+  color: #2ab5ec;
+  border: 1px solid #2ab5ec;
+  transition: background 0.2s, color 0.2s;
+}
+.add-account-btn:hover {
+  background: #2ab5ec;
+  color: #fff;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  min-height: 22px;
+}
+/* Make password toggle wrapper match other inputs */
+.pw-toggle-wrapper {
+  display: block;           /* full width block */
+  width: 100%;              /* fill form column */
+  box-sizing: border-box;   /* include padding/border in width */
+}
+
+/* Ensure the input inside wrapper fills the wrapper */
+.pw-toggle-wrapper input[type="password"],
+.pw-toggle-wrapper input[type="text"] {
+  width: 100%;
+  box-sizing: border-box;
+  /* keep right padding to make room for the eye button */
+  padding-right: 44px;
+}
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0; top: 0;
+  width: 100vw; height: 100vh;
+  overflow: auto;
+  background: rgba(0,0,0,0.3);
+}
+.modal-content {
+  background: #fff;
+  margin: 6% auto;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  width: 340px;
+  position: relative;
+  text-align: center;
+}
+.close {
+  color: #aaa;
+  position: absolute;
+  top: 10px; right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.close:hover { color: #333; }
