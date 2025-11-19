@@ -225,7 +225,7 @@ body {
 .add-btn-row {
   margin-left: 18px;
 }
-.primary-btn, .modal-save {
+.primary-btn {
   background: #6d9efc;
   color: #fff;
   border: none;
@@ -239,7 +239,23 @@ body {
   display: flex;
   align-items: center;
 }
-.primary-btn:hover, .modal-save:hover {
+.primary-btn:hover {
+  background: #5279da;
+}
+.modal-save {
+  background: #6d9efc;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 9px 28px;
+  font-size: 1.05em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.16s;
+  box-shadow: 0 1px 3px rgba(125, 125, 150, 0.02);
+  margin-left: 8px;
+}
+.modal-save:hover {
   background: #5279da;
 }
 
@@ -374,61 +390,67 @@ body {
 
 /* MODALS */
 .modal {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s;
   display: none;
   position: fixed;
   z-index: 9999;
-  left: 0; top: 0; width: 100%; height: 100%;
-  background: rgba(40, 50, 70, 0.16);
-}
-.modal[style*="display: block"] {
-  opacity: 1;
-  pointer-events: auto;
+  left: 0; top: 0;
+  width: 100vw; height: 100vh;
+  overflow: auto;
+  background: rgba(40,40,50,0.15);
+  transition: opacity 0.18s;
+  padding: 0;
 }
 .modal-content {
   background: #fff;
-  border-radius: 18px;
-  margin: 36px auto;
-  padding: 18px 24px 16px 24px;   /* reduced padding! */
-  max-width: 370px;               /* narrower modal */
-  width: 96vw;
-  max-height: 80vh;
-  box-shadow: 0 6px 36px #b0b7c8;
+  margin: 48px auto;
+  border-radius: 14px;
+  padding: 0 0 18px 0;
+  max-width: 420px;
+  box-shadow: 0 8px 44px rgba(0,0,0,0.14);
   position: relative;
-  overflow-y: auto;
+  animation: modalIn 0.2s;
+  display: flex;
+  flex-direction: column;
+  min-height: 100px;
+  max-height: 94vh;
+}
+@keyframes modalIn {
+  0% { transform: translateY(80px) scale(0.94); opacity: 0; }
+  100% { transform: none; opacity: 1; }
 }
 .modal-content .close {
   position: absolute;
-  top: 16px; right: 20px;
-  font-size: 1.6rem;
-  color: #888;
+  right: 26px;
+  top: 18px;
+  color: #999;
+  font-size: 1.7em;
+  font-weight: 400;
   cursor: pointer;
-  transition: color 0.14s;
-}
-.modal-content .close:hover {
-  color: #2a5dde;
+  z-index: 1;
 }
 .modal-content h2 {
-  margin-top: 0;
-  font-size: 1.12rem;   /* slightly smaller */
+  font-size: 1.35em;
   font-weight: 700;
-  color: #232d3b;
-  margin-bottom: 12px;
+  margin: 0;
+  padding: 20px 24px 12px 24px;
+  border-bottom: 1px solid #f2f2f2;
+  color: #23272e;
 }
 .modal-details-form {
   margin-top: 10px;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding-bottom: 3px;
 }
 .modal-field {
-  margin: 10px 0 0 0;  /* less vertical space */
+  margin: 16px 24px 0 24px;
 }
 .modal-field label {
   display: block;
   font-weight: 600;
   color: #23272e;
   font-size: 1.02em;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 .modal-field input,
 .modal-field select,
@@ -438,7 +460,7 @@ body {
   border: none;
   background: #f7f8fa;
   border-radius: 20px;
-  padding: 8px 12px;
+  padding: 12px 18px;
   font-size: 1em;
   color: #23272e;
   outline: none;
@@ -461,20 +483,19 @@ body {
   display: flex;
   justify-content: flex-end;
   gap: 16px;
-  padding: 18px 0 0 0;
+  padding: 18px 40px 0 24px;
   border-top: 1px solid #f2f2f2;
   margin-top: 22px;
 }
 .modal-cancel {
-    text-decoration-color: #222f4a;
     border: none;
     border-radius: 20px;
     padding: 9px 28px;
     font-size: 1.05em;
     font-weight: 600;
     cursor: pointer;
-    background: #ffffff;
-    color: #000000;
+    background: #fff;
+    color: #23272e;
     transition: background 0.16s;
     box-shadow: 0 1px 3px rgba(125, 125, 150, 0.02);
 }
@@ -537,4 +558,21 @@ body {
   .header-row h2 { font-size: 1.15em; }
   .modal-content { padding: 12px 4px 18px 7px; }
   .primary-btn, .modal-content button { font-size: .92rem; padding: 8px 10px; }
+}
+@media (max-width: 600px) {
+    .modal-content {
+        max-width: 99vw;
+        min-width: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .modal-details-form,
+    .modal-field,
+    .modal-actions,
+    .delete-warning {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
 }

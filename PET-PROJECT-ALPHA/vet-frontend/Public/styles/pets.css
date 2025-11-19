@@ -343,16 +343,21 @@ body {
     overflow: auto;
     background: rgba(40,40,50,0.15);
     transition: opacity 0.18s;
+    padding: 0;
 }
 .modal-content {
     background: #fff;
-    margin: 36px auto;
+    margin: 48px auto;
     border-radius: 14px;
     padding: 0 0 18px 0;
     max-width: 420px;
     box-shadow: 0 8px 44px rgba(0,0,0,0.14);
     position: relative;
     animation: modalIn 0.2s;
+    display: flex;
+    flex-direction: column;
+    min-height: 100px;
+    max-height: 94vh;
 }
 @keyframes modalIn {
     0% { transform: translateY(80px) scale(0.94); opacity: 0; }
@@ -364,9 +369,13 @@ body {
     margin: 0;
     padding: 20px 24px 12px 24px;
     border-bottom: 1px solid #f2f2f2;
+    color: #23272e;
 }
 .modal-details-form {
     margin-top: 10px;
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding-bottom: 3px;
 }
 .modal-field {
     margin: 16px 24px 0 24px;
@@ -376,6 +385,7 @@ body {
     font-weight: 600;
     color: #23272e;
     font-size: 1.02em;
+    margin-bottom: 6px;
 }
 .modal-field input, .modal-field textarea , .modal-field select {
     width: 100%;
@@ -415,21 +425,20 @@ body {
 .modal-close-btn {
   border: none;
   border-radius: 20px;
-  padding: 12px 36px;
+  padding: 9px 28px;
   font-size: 1.05em;
   font-weight: 600;
   cursor: pointer;
-  background: #72a2ff;
+  background: #6d9efc;
   color: #fff;
   transition: background 0.16s;
-  box-shadow: 0 1px 3px rgba(80, 120, 255, 0.08);
-  /* keep the style consistent with treatment modal! */
+  box-shadow: 0 1px 3px rgba(125, 125, 150, 0.02);
+  margin-left: 8px;
 }
 
 .modal-close-btn:hover,
 .modal-close-btn:focus {
-  background: #5c8ee6;
-  box-shadow: 0 2px 8px rgba(80,120,255,0.10);
+  background: #5279da;
   outline: none;
 }
 .modal-actions {
@@ -511,5 +520,19 @@ body {
     .pet-table { min-width: 700px; }
 }
 @media (max-width: 600px) {
-    .modal-content { max-width: 99vw; }
+    .modal-content {
+        max-width: 99vw;
+        min-width: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .modal-details-form,
+    .modal-field,
+    .modal-actions,
+    .delete-warning {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
 }
