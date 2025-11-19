@@ -94,22 +94,27 @@
         <div class="modal-content">
             <span class="close" id="closeAddOwnerModal">&times;</span>
             <h2>Add New Owner</h2>
-            <form id="addOwnerForm">
-                <label>Name
+            <form id="addOwnerForm" class="modal-details-form" autocomplete="off">
+                <div class="modal-field">
+                    <label for="addOwnerName">Name</label>
                     <input type="text" id="addOwnerName" name="ownerName" required>
-                </label>
-                <label>Contact Number
+                </div>
+                <div class="modal-field">
+                    <label for="addOwnerContact">Contact Number</label>
                     <input type="text" id="addOwnerContact" name="ownerContact" required>
-                </label>
-                <label>Email
+                </div>
+                <div class="modal-field">
+                    <label for="addOwnerEmail">Email</label>
                     <input type="email" id="addOwnerEmail" name="ownerEmail" required>
-                </label>
-                <label>Address
+                </div>
+                <div class="modal-field">
+                    <label for="addOwnerAddress">Address</label>
                     <input type="text" id="addOwnerAddress" name="ownerAddress" required>
-                </label>
-                <label>Pets
+                </div>
+                <div class="modal-field">
+                    <label for="addOwnerPets">Pets</label>
                     <input type="number" id="addOwnerPets" name="ownerPets" value="1" min="0" required>
-                </label>
+                </div>
                 <div class="modal-actions">
                     <button type="button" class="modal-cancel" id="cancelAddOwnerBtn">Cancel</button>
                     <button type="submit" class="modal-save">Save</button>
@@ -122,22 +127,27 @@
         <div class="modal-content">
             <span class="close" id="closeEditOwnerModal">&times;</span>
             <h2>Edit Owner</h2>
-            <form id="editOwnerForm">
-                <label>Name
+            <form id="editOwnerForm" class="modal-details-form" autocomplete="off">
+                <div class="modal-field">
+                    <label for="editOwnerName">Name</label>
                     <input type="text" id="editOwnerName" required>
-                </label>
-                <label>Contact Number
+                </div>
+                <div class="modal-field">
+                    <label for="editOwnerContact">Contact Number</label>
                     <input type="text" id="editOwnerContact" required>
-                </label>
-                <label>Email
+                </div>
+                <div class="modal-field">
+                    <label for="editOwnerEmail">Email</label>
                     <input type="email" id="editOwnerEmail" required>
-                </label>
-                <label>Address
+                </div>
+                <div class="modal-field">
+                    <label for="editOwnerAddress">Address</label>
                     <input type="text" id="editOwnerAddress" required>
-                </label>
-                <label>Pets
+                </div>
+                <div class="modal-field">
+                    <label for="editOwnerPets">Pets</label>
                     <input type="number" id="editOwnerPets" min="0" required>
-                </label>
+                </div>
                 <div class="modal-actions">
                     <button type="button" class="modal-cancel" id="cancelEditOwnerBtn">Cancel</button>
                     <button type="submit" class="modal-save">Save</button>

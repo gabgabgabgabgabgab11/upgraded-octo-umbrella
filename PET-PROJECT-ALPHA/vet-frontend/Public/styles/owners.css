@@ -344,16 +344,21 @@ body {
   overflow: auto;
   background: rgba(40,40,50,0.15);
   transition: opacity 0.18s;
+  padding: 0;
 }
 .modal-content {
   background: #fff;
-  margin: 36px auto;
+  margin: 48px auto;
   border-radius: 14px;
   padding: 0 0 18px 0;
   max-width: 420px;
   box-shadow: 0 8px 44px rgba(0,0,0,0.14);
   position: relative;
   animation: modalIn 0.2s;
+  display: flex;
+  flex-direction: column;
+  min-height: 100px;
+  max-height: 94vh;
 }
 @keyframes modalIn {
   0% { transform: translateY(80px) scale(0.94); opacity: 0; }
@@ -367,14 +372,23 @@ body {
   border-bottom: 1px solid #f2f2f2;
   color: #23272e;
 }
-.modal-content label {
+.modal-details-form {
+  margin-top: 10px;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  padding-bottom: 3px;
+}
+.modal-field {
+  margin: 16px 24px 0 24px;
+}
+.modal-field label {
   display: block;
-  margin: 18px 24px 0 24px;
   font-weight: 600;
   color: #23272e;
   font-size: 1.02em;
+  margin-bottom: 6px;
 }
-.modal-content input, .modal-content textarea {
+.modal-field input, .modal-field textarea, .modal-field select {
   width: 100%;
   margin-top: 7px;
   border: none;
@@ -387,7 +401,7 @@ body {
   box-sizing: border-box;
   margin-bottom: 2px;
 }
-.modal-content textarea {
+.modal-field textarea {
   border-radius: 12px;
   resize: vertical;
 }
@@ -401,9 +415,6 @@ body {
   cursor: pointer;
   z-index: 1;
 }
-.close:hover {
-  color: #2a5dde;
-}
 
 
 
@@ -413,7 +424,7 @@ body {
   display: flex;
   justify-content: flex-end;
   gap: 16px;
-  padding: 18px 24px 0 24px;
+  padding: 18px 40px 0 24px;
   border-top: 1px solid #f2f2f2;
   margin-top: 22px;
 }
@@ -495,15 +506,27 @@ body {
 }
 
 /* Responsive Design Tweaks */
-@media (max-width: 1500px) {
-  .owner-table { min-width: 1050px;}
-}
 @media (max-width: 900px) {
-  .navbar, .container { padding-left: 6px; padding-right: 6px; }
-  .owner-table { min-width: 700px; }
+    .navbar, .container { padding-left: 6px; padding-right: 6px; }
+    .owner-table { min-width: 700px; }
 }
 @media (max-width: 600px) {
-  .modal-content { max-width: 99vw; }
-  .owner-table { min-width: 100vw;}
-  .container { max-width: 99vw;}
+    .modal-content { max-width: 99vw; }
+    .owner-table { min-width: 100vw;}
+    .container { max-width: 99vw;}
+    .modal-content {
+        max-width: 99vw;
+        min-width: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .modal-details-form,
+    .modal-field,
+    .modal-actions,
+    .delete-warning {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
 }
