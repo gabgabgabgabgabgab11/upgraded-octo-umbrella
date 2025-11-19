@@ -567,7 +567,7 @@ body {
         padding-right: 0;
     }
     .modal-details-form,
-    .modal-content label,
+    .modal-field,
     .modal-actions,
     .delete-warning {
         padding-left: 8px !important;

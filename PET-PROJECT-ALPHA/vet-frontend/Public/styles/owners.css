@@ -511,7 +511,6 @@ body {
     .owner-table { min-width: 700px; }
 }
 @media (max-width: 600px) {
-    .modal-content { max-width: 99vw; }
     .owner-table { min-width: 100vw;}
     .container { max-width: 99vw;}
     .modal-content {
